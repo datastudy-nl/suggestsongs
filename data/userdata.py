@@ -33,4 +33,4 @@ def create_user(user_data):
                 user_data.get('country'),
                 user_data.get('images')[0].get('url')
             ))
-            conn.commit()
+        conn.commit()

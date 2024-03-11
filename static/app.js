@@ -6,7 +6,7 @@ async function rateTrack(rating) {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ track_id: current_track.track_id, rating })
+        body: JSON.stringify({ id: current_track.id, rating })
     });
     if (songs_to_rate.length < 5) await getNextSongs();
     showNextTrack();
@@ -30,7 +30,7 @@ async function showNextTrack() {
         document.getElementById('embed-song').src = '';
         return;
     }
-    document.getElementById('embed-song').src = `https://open.spotify.com/embed/track/${current_track.track_id}?theme=0`;
+    document.getElementById('embed-song').src = `https://open.spotify.com/embed/track/${current_track.id}?theme=0`;
 
 }
 showNextTrack();

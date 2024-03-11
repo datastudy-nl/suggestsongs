@@ -32,4 +32,4 @@ def get_access_token(id):
     with db.get_connection() as conn:
         with conn.cursor() as cursor:
             cursor.execute(query, (id,))
-            return cursor.fetchone()
+            return cursor.fetchone()[0]
