@@ -18,7 +18,6 @@ def get_random_tracks():
 
 def save_tracks(tracks):
     with db.get_connection() as conn:
-        print(tracks)
         with conn.cursor() as cursor:
             cursor.executemany('''
                 INSERT INTO tracks (id, name, artist, album, duration_ms, popularity, explicit, url) 

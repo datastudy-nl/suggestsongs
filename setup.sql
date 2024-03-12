@@ -7,6 +7,12 @@ CREATE TABLE IF NOT EXISTS users (
     image VARCHAR(1000)
 );
 
+CREATE TABLE IF NOT EXISTS logins (
+    user_id VARCHAR(255),
+    date TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
 CREATE TABLE IF NOT EXISTS authentication (
     id VARCHAR(255) PRIMARY KEY,
     access_token VARCHAR(1000),
