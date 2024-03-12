@@ -11,9 +11,12 @@ main = Flask(__name__, template_folder='templates', static_folder='static', stat
 @main.route('/', methods=['GET'])
 @dsc.flask.catch_exceptions
 def index():
-    user_data = userservice.get_user_data(request.cookies.get('auth_token'))
-    if not user_data: return render_template('index.html')
-    return render_template('index.html', name=user_data.get('display_name'), email=user_data.get('email'), product=user_data.get('product'))
+    try:
+        user_data = userservice.get_user_data(request.cookies.get('auth_token'))
+        if not user_data: return render_template('index.html')
+        return render_template('index.html', name=user_data.get('display_name'), email=user_data.get('email'), product=user_data.get('product'))
+    except:
+        return render_template('index.html')
 
 @main.route('/login', methods=['GET'])
 @dsc.flask.catch_exceptions
@@ -52,4 +55,4 @@ def rate_track():
     trackservice.rate_track(user_id, request.json.get('id'), request.json.get('rating'))
     return jsonify({'status': 'ok'})
 
-if __name__ == '__main__': main.run(debug=True, host='0.0.0.0', port=os.environ.get('PORT', 8080))
+if __name__ == '__main__': main.run(debug=True, host='0.0.0.0', port=os.environ.get('PORT', 80))

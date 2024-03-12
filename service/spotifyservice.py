@@ -19,3 +19,9 @@ def get_recommendations(user_id):
 def get_audio_features(user_id, tracks):
     access_token = logindata.get_access_token(user_id)
     return spotifydata.get_audio_features(access_token, tracks)
+
+def add_random_unrated_tracks(user_id):
+    access_token = logindata.get_access_token(user_id)
+    random_tracks = trackservice.get_random_tracks()
+    trackservice.save_top_tracks_user(user_id, random_tracks)
+    return

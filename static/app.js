@@ -7,8 +7,10 @@ async function rateTrack(rating) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({ id: current_track.id, rating })
-    });
-    if (songs_to_rate.length < 5) await getNextSongs();
+    })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
     showNextTrack();
 }
 
@@ -18,11 +20,14 @@ async function getNextSongs() {
         .then(response => response.json())
         .then(data => {
             songs_to_rate = data.data;
+        })
+        .catch((error) => {
+            console.error('Error:', error);
         });
 }
 
 async function showNextTrack() {
-    if (songs_to_rate.length < 5) await getNextSongs();
+    if (songs_to_rate.length < 2) await getNextSongs();
     if (!songs_to_rate) return;
     current_track = songs_to_rate.shift();
     if (!current_track) {

@@ -1,4 +1,20 @@
 import database as db
+from dto.track import Track
+
+
+def get_random_tracks():
+    query = """
+        SELECT id, name, artist, album, duration_ms, popularity, explicit, url
+        FROM tracks
+        ORDER BY RAND()
+        LIMIT 5
+    """
+    with db.get_connection() as conn:
+        with conn.cursor(dictionary=True) as cursor:
+            tracks = []
+            cursor.execute(query)
+            for track in cursor.fetchall(): tracks.append(Track(**track))
+                
 
 def save_tracks(tracks):
     with db.get_connection() as conn:
@@ -16,12 +32,11 @@ def save_tracks(tracks):
                 explicit = VALUES(explicit),
                 url = VALUES(url)
                 ''',
-                [(track.id, track.name, track.artist, track.album, track.duration, track.popularity, track.explicit, track.url) for track in tracks])
+                [(track.id, track.name, track.artist, track.album, track.duration_ms, track.popularity, track.explicit, track.url) for track in tracks])
         conn.commit()
 
 def add_unrated_tracks(user_id, tracks):
     with db.get_connection() as conn:
-        print(user_id, tracks)
         with conn.cursor() as cursor:
             cursor.executemany('''
                 INSERT IGNORE INTO track_rating (user_id, track_id, rating) 
@@ -42,8 +57,10 @@ def get_unrated_tracks(user_id):
     """
     with db.get_connection() as conn:
         with conn.cursor(dictionary=True) as cursor:
+            tracks = []
             cursor.execute(query, (user_id,))
-            return cursor.fetchall()
+            for track in cursor.fetchall(): tracks.append(Track(**track))
+            return tracks
         
 def rate_track(user_id, track_id, rating):
     query = """
@@ -69,7 +86,7 @@ def get_track_seed_for_user(user_id):
     with db.get_connection() as conn:
         with conn.cursor(dictionary=True) as cursor:
             cursor.execute(query, (user_id,))
-            return [dict(track)['track_id'] for track in cursor.fetchall()]
+            return [dict(track).get('track_id') for track in cursor.fetchall()]
         
 def save_audio_features(tracks):
     with db.get_connection() as conn:

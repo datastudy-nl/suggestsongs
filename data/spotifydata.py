@@ -27,7 +27,7 @@ def get_top_tracks_user(access_token):
     response = requests.get(f'https://api.spotify.com/v1/me/top/tracks', headers={
         'Authorization': f'Bearer {access_token}'}).json()
     tracks = []
-    print(response)
+    if not response.get('items'): return []
     for item in response.get('items'):
         tracks.append(
             track.Track(
@@ -48,6 +48,7 @@ def get_recommendations(access_token, seed_tracks):
     response = requests.get(f'https://api.spotify.com/v1/recommendations?seed_tracks={seed_tracks_text}', headers={
         'Authorization': f'Bearer {access_token}'}).json()
     tracks = []
+    if not response.get('tracks'): return []
     for item in response.get('tracks'):
         tracks.append(
             track.Track(
