@@ -1,5 +1,5 @@
 # Using python:3.9-slim-buster as the base image
-FROM python:3.12-slim-buster
+FROM python:3.12-slim
 
 # Accept GH_PAT as a build argument
 ARG GH_PAT
