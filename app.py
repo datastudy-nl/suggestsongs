@@ -56,4 +56,10 @@ def rate_track():
     trackservice.rate_track(user_id, request.json.get('id'), request.json.get('rating'))
     return jsonify({'status': 'ok'})
 
+@main.route('/api/top-rated-songs', methods=['GET'])
+@dsc.flask.catch_exceptions
+def top_rated_tracks():
+    user_id = loginservice.get_user_id(request.cookies.get('auth_token'))
+    return jsonify({'data': trackservice.get_top_rated_tracks(user_id)})
+
 if __name__ == '__main__': main.run(debug=True, host='0.0.0.0', port=os.environ.get('PORT', 80))

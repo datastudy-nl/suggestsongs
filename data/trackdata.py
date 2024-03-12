@@ -1,6 +1,22 @@
 import database as db
 from dto.track import Track
 
+def get_top_rated_tracks(user_id):
+    query = """
+        SELECT t.id, t.name, t.artist, t.album, t.duration_ms, t.popularity, t.explicit, t.url, tr.rating
+        FROM track_rating tr
+        JOIN tracks t ON tr.track_id = t.id
+        WHERE tr.user_id = %s
+        AND tr.rating IS NOT NULL
+        ORDER BY tr.rating DESC
+        LIMIT 50
+    """
+    with db.get_connection() as conn:
+        with conn.cursor(dictionary=True) as cursor:
+            tracks = []
+            cursor.execute(query, (user_id,))
+            for track in cursor.fetchall(): tracks.append(Track(**track))
+            return tracks
 
 def get_random_tracks():
     query = """

@@ -10,6 +10,9 @@ def save_top_tracks_user(user_id, top_tracks):
     trackdata.add_unrated_tracks(user_id, top_tracks)
     return
 
+def get_top_rated_tracks(user_id):
+    return [track.to_dict() for track in trackdata.get_top_rated_tracks(user_id)]
+
 def get_next_songs(user_id):
     next_tracks = trackdata.get_unrated_tracks(user_id)
     if not next_tracks:

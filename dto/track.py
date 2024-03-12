@@ -1,6 +1,6 @@
 
 class Track:
-    def __init__(self, id, name, artist, album, duration_ms, popularity, explicit, url):
+    def __init__(self, id, name, artist, album, duration_ms, popularity, explicit, url, rating=None):
         self.id = id
         self.name = name
         self.artist = artist
@@ -9,6 +9,7 @@ class Track:
         self.popularity = popularity
         self.explicit = explicit
         self.url = url
+        self.rating = rating
 
     def to_dict(self):
         return {
@@ -19,5 +20,6 @@ class Track:
             'duration_ms': self.duration_ms,
             'popularity': self.popularity,
             'explicit': self.explicit,
-            'url': self.url
+            'url': self.url,
+            'rating': self.rating
         }
