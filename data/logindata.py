@@ -37,8 +37,8 @@ def store_authentication_code(id, access_token, refresh_token):
             conn.commit()
 
 def get_access_token(id):
-    query = 'SELECT access_token FROM authentication WHERE id = %s'
+    query = 'SELECT access_token, refresh_token FROM authentication WHERE id = %s'
     with db.get_connection() as conn:
         with conn.cursor() as cursor:
             cursor.execute(query, (id,))
-            return cursor.fetchone()[0]
+            return cursor.fetchone()

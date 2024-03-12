@@ -85,3 +85,12 @@ def get_audio_features(access_token, tracks):
             'time_signature': item.get('time_signature')
         }
     return features
+
+
+def refresh_access_token(refresh_token):
+    return requests.post('https://accounts.spotify.com/api/token', data={
+        'grant_type': 'refresh_token',
+        'refresh_token': refresh_token,
+        'client_id': CLIENT_ID,
+        'client_secret': CLIENT_SECRET
+    }).json()

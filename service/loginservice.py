@@ -14,3 +14,11 @@ def login_user(code):
 
 def get_user_id(jwt_token):
     return logindata.get_id(jwt_token)
+
+def get_access_token(user_id):
+    return logindata.get_access_token(user_id)[0]
+
+def refresh_access_token(user_id):
+    auth_token = spotifydata.refresh_access_token(logindata.get_access_token(user_id)[1])
+    logindata.store_authentication_code(user_id, auth_token['access_token'], auth_token['refresh_token'])
+    return auth_token['access_token']

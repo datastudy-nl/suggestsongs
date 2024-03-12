@@ -68,4 +68,4 @@ async function showNextTrack() {
 
 
 showNextTrack();
-getTopRatedTracks()
+// getTopRatedTracks()
