@@ -19,11 +19,12 @@ CREATE TABLE IF NOT EXISTS tracks (
     name VARCHAR(1000),
     artist VARCHAR(1000),
     album VARCHAR(1000),
-    image VARCHAR(1000),
-    preview_url VARCHAR(1000),
-    uri VARCHAR(1000),
-    FOREIGN KEY (id) REFERENCES users(id)
+    duration_ms VARCHAR(1000),
+    popularity VARCHAR(1000),
+    explicit VARCHAR(1000),
+    url VARCHAR(1000)
 );
+
 
 CREATE TABLE IF NOT EXISTS track_rating (
     track_id VARCHAR(255),
@@ -32,4 +33,22 @@ CREATE TABLE IF NOT EXISTS track_rating (
     PRIMARY KEY (track_id, user_id),
     FOREIGN KEY (track_id) REFERENCES tracks(id),
     FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+CREATE TABLE IF NOT EXISTS audio_features (
+    track_id VARCHAR(255) PRIMARY KEY,
+    danceability FLOAT,
+    energy FLOAT,
+    key_ INT,
+    loudness FLOAT,
+    mode INT,
+    speechiness FLOAT,
+    acousticness FLOAT,
+    instrumentalness FLOAT,
+    liveness FLOAT,
+    valence FLOAT,
+    tempo FLOAT,
+    duration_ms INT,
+    time_signature INT,
+    FOREIGN KEY (track_id) REFERENCES tracks(id)
 );
