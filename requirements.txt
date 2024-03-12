@@ -5,3 +5,5 @@ python-dotenv
 git+https://github.com/datastudy-nl/datastudy-commons.git
 
 mysql-connector-python
+
+waitress

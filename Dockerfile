@@ -1,4 +1,3 @@
-# Using python:3.9-slim-buster as the base image
 FROM python:3.12-slim
 
 # Accept GH_PAT as a build argument
@@ -27,4 +26,4 @@ RUN pip3 install --trusted-host pypi.python.org -r requirements.txt
 RUN rm ~/.netrc
 
 # Command to run when starting the container
-CMD ["python3", "app.py"]
+CMD ["waitress-serve", "--port=80", "app:main"]

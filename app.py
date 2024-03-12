@@ -5,6 +5,7 @@ import service.userservice as userservice
 import service.spotifyservice as spotifyservice
 import service.trackservice as trackservice
 import dotenv, os
+from waitress import serve
 
 main = Flask(__name__, template_folder='templates', static_folder='static', static_url_path='/')
 
@@ -84,4 +85,8 @@ def top_rated_tracks():
     user_id = loginservice.get_user_id(request.cookies.get('auth_token'))
     return jsonify({'data': trackservice.get_top_rated_tracks(user_id)})
 
-if __name__ == '__main__': main.run(debug=True, host='0.0.0.0', port=os.environ.get('PORT', 80))
+
+
+
+if __name__ == '__main__':
+    serve(main, host='0.0.0.0', port=os.environ.get('PORT', 80))
