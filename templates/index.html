@@ -10,37 +10,41 @@
 <body>
     <div class="main-container">
         {% if name %}
-            <a href="/logout" class="logout-button">Logout</a>
-            <h1 class="title">What do you think of this song, {{ name }}?</h1>
-            <!-- <h2 id="out-of-songs"></h2> -->
-            <iframe id="embed-song" style="border-radius:12px" src="" allow="autoplay; encrypted-media; fullscreen" frameBorder="0" loading="lazy"></iframe>
-            <div class="rating-container">
-                <button onclick="rateTrack(1)" style="background-color: #f00;">Rate 1</button>
-                <button onclick="rateTrack(2)" style="background-color: #f88;">Rate 2</button>
-                <button onclick="rateTrack(3)" style="background-color: #fa8;">Rate 3</button>
-                <button onclick="rateTrack(4)" style="background-color: #fa0;">Rate 4</button>
-                <button onclick="rateTrack(5)" style="background-color: #fa0;">Rate 5</button>
-                <button onclick="rateTrack(6)" style="background-color: #ff0;">Rate 6</button>
-                <button onclick="rateTrack(7)" style="background-color: #afa;">Rate 7</button>
-                <button onclick="rateTrack(8)" style="background-color: #8f8;">Rate 8</button>
-                <button onclick="rateTrack(9)" style="background-color: #af0;">Rate 9</button>
-                <button onclick="rateTrack(10)" style="background-color: #0f0;">Rate 10</button>
-            </div>
-            <div class="top-rated-songs">
-                <h2>Recommendations</h2>
-                <h3>Coming soon!</h3>
-                <ul id="top-rated-songs-list">
-                </ul>
-            </div>
-            {% else %}
-                <h1 class="main-title bouncy"><img src="favicon.ico"><span class="suggest">Suggest</span><span class="songs">Songs</span><span class="suggest">.com</span></h1>
-                <h2 class="fade-in">Harmonize Your Tastes, Amplify Your Playlists!</h2>
-                <div class="login-container">
-                    <a href="/login" class="login-button"><img class="spotify-login-logo" src="spotify.png">Sign in with Spotify</a>
-                </div>
-            {% endif %}
+        <a href="/logout" class="logout-button">Logout</a>
+        <a href="/feedback" class="feedback-button">feedback</a>
+        <h1 class="title">What do you think of this song, {{ name }}?</h1>
+        <!-- <h2 id="out-of-songs"></h2> -->
+        <iframe id="embed-song" style="border-radius:12px" src="" allow="autoplay; encrypted-media; fullscreen"
+            frameBorder="0" loading="lazy"></iframe>
+        <div class="rating-container">
+            <button onclick="rateTrack(1)" style="background-color: #f00;">Rate 1</button>
+            <button onclick="rateTrack(2)" style="background-color: #f88;">Rate 2</button>
+            <button onclick="rateTrack(3)" style="background-color: #fa8;">Rate 3</button>
+            <button onclick="rateTrack(4)" style="background-color: #fa0;">Rate 4</button>
+            <button onclick="rateTrack(5)" style="background-color: #fa0;">Rate 5</button>
+            <button onclick="rateTrack(6)" style="background-color: #ff0;">Rate 6</button>
+            <button onclick="rateTrack(7)" style="background-color: #afa;">Rate 7</button>
+            <button onclick="rateTrack(8)" style="background-color: #8f8;">Rate 8</button>
+            <button onclick="rateTrack(9)" style="background-color: #af0;">Rate 9</button>
+            <button onclick="rateTrack(10)" style="background-color: #0f0;">Rate 10</button>
+        </div>
+        <div class="top-rated-songs">
+            <h2>Recommendations</h2>
+            <h3>Coming soon!</h3>
+            <ul id="top-rated-songs-list">
+            </ul>
+        </div>
+        <script src="app.js"></script>
+        {% else %}
+        <h1 class="main-title bouncy"><img src="favicon.ico"><span class="suggest">Suggest</span><span
+                class="songs">Songs</span><span class="suggest">.com</span></h1>
+        <h2 class="fade-in">Harmonize Your Tastes, Amplify Your Playlists!</h2>
+        <div class="login-container">
+            <a href="/login" class="login-button"><img class="spotify-login-logo" src="spotify.png">Sign in with
+                Spotify</a>
+        </div>
+        {% endif %}
     </div>
-    <script src="app.js"></script>
 </body>
 
 </html>

@@ -178,6 +178,20 @@ h3 {
     right: 20px;
 }
 
+.feedback-button {
+    background-color: #727272;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 20px;
+    text-decoration: none;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+
 
 
 @media (max-width: 768px) {
@@ -209,4 +223,9 @@ h3 {
     background-color: #f1f1f1;
     margin-top: 10px;
     color: black;
+}
+
+
+a {
+    color: white;
 }

@@ -11,6 +11,16 @@ def get_user_data(id):
             cursor.execute(query, (id,))
             return cursor.fetchone()
         
+def save_feedback(user_id, feedback):
+    query = """
+        INSERT INTO feedback (user_id, feedback)
+        VALUES (%s, %s)
+    """
+    with db.get_connection() as conn:
+        with conn.cursor() as cursor:
+            cursor.execute(query, (user_id, feedback))
+        conn.commit()
+        
 
 def create_user(user_data):
     query = """

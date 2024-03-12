@@ -15,8 +15,30 @@ def index():
         user_data = userservice.get_user_data(request.cookies.get('auth_token'))
         if not user_data: return render_template('index.html')
         return render_template('index.html', name=user_data.get('display_name'), email=user_data.get('email'), product=user_data.get('product'))
-    except:
-        return render_template('index.html')
+    except: return render_template('index.html')
+
+@main.route('/feedback', methods=['GET'])
+@dsc.flask.catch_exceptions
+def feedback():
+    try:
+        user_data = userservice.get_user_data(request.cookies.get('auth_token'))
+        if not user_data: return redirect('/')
+        return render_template('feedback.html', name=user_data.get('display_name'), email=user_data.get('email'), product=user_data.get('product'))
+    except: return redirect('/')
+
+@main.route('/api/feedback', methods=['POST'])
+@dsc.flask.required_form_keys(['feedback'])
+@dsc.flask.catch_exceptions
+def feedback_post():
+    user_id = loginservice.get_user_id(request.cookies.get('auth_token'))
+    try: userservice.save_feedback(user_id, request.form.get('feedback'))
+    except ValueError as e: return render_template('feedback_error.html', error=str(e))
+    return redirect('/feedback_thanks')
+
+@main.route('/feedback_thanks', methods=['GET'])
+@dsc.flask.catch_exceptions
+def feedback_thanks():
+    return render_template('feedback_thanks.html')
 
 @main.route('/login', methods=['GET'])
 @dsc.flask.catch_exceptions

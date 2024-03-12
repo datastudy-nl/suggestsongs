@@ -58,3 +58,10 @@ CREATE TABLE IF NOT EXISTS audio_features (
     time_signature INT,
     FOREIGN KEY (track_id) REFERENCES tracks(id)
 );
+
+CREATE TABLE IF NOT EXISTS feedback (
+    user_id VARCHAR(255),
+    feedback VARCHAR(1000),
+    date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
