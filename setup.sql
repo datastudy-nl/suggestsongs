@@ -36,6 +36,7 @@ CREATE TABLE IF NOT EXISTS track_rating (
     track_id VARCHAR(255),
     user_id VARCHAR(255),
     rating INT,
+    date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (track_id, user_id),
     FOREIGN KEY (track_id) REFERENCES tracks(id),
     FOREIGN KEY (user_id) REFERENCES users(id)
