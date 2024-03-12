@@ -27,7 +27,8 @@ def login():
 @dsc.flask.required_query_keys(['code'])
 @dsc.flask.catch_exceptions
 def spotify_callback():
-    jwt_token = loginservice.login_user(request.args.get('code'))
+    try: jwt_token = loginservice.login_user(request.args.get('code'))
+    except: return "Could not authenticate. Are you added as a tester? Ask Lars for help."
     response = make_response(redirect('/'))
     response.set_cookie('auth_token', jwt_token, max_age=3600)
     user_id = loginservice.get_user_id(jwt_token)
