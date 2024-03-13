@@ -54,7 +54,7 @@ def add_unrated_tracks(user_id, tracks):
     with db.get_connection() as conn:
         with conn.cursor() as cursor:
             cursor.executemany('''
-                INSERT IGNORE INTO track_rating (user_id, track_id, rating) 
+                INSERT IGNORE INTO track_rating (user_id, track_id, rating)
                 VALUES (%s, %s, NULL)
                 ''',
                 [(user_id, track.id) for track in tracks])
@@ -80,7 +80,7 @@ def get_unrated_tracks(user_id):
 def rate_track(user_id, track_id, rating):
     query = """
         UPDATE track_rating
-        SET rating = %s
+        SET rating = %s, date = NOW()
         WHERE user_id = %s
         AND track_id = %s
     """
