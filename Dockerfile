@@ -26,4 +26,4 @@ RUN pip3 install --trusted-host pypi.python.org -r requirements.txt
 RUN rm ~/.netrc
 
 # Command to run when starting the container
-CMD ["waitress-serve", "--port=80", "app:main"]
+CMD ["waitress-serve", "app:main"]
