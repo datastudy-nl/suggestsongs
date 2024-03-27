@@ -7,6 +7,8 @@ import service.trackservice as trackservice
 import dotenv, os
 from waitress import serve
 
+if not os.getenv('PRODUCTION'): dotenv.load_dotenv()
+
 main = Flask(__name__, template_folder='templates', static_folder='static', static_url_path='/')
 
 @main.route('/', methods=['GET'])

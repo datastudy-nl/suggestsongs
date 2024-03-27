@@ -1,10 +1,12 @@
 import requests
+import os
 import dto.track as track
 
-SCOPES = 'user-read-private user-read-email user-library-read user-top-read'
-CLIENT_ID = '68b1593faf144e20a8a0c326fadea242'
-CLIENT_SECRET = 'b15e6a71e6eb49988b6b9411f870e5bd'
-REDIRECT_URL = 'https://suggestsongs.com/callback/spotify'
+SCOPES = os.getenv('SCOPES')
+CLIENT_ID = os.getenv('CLIENT_ID')
+CLIENT_SECRET = os.getenv('CLIENT_SECRET')
+REDIRECT_URL = os.getenv('REDIRECT_URL')
+
 
 def convert_spotify_code(code):
     return requests.post('https://accounts.spotify.com/api/token', data={

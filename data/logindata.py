@@ -1,9 +1,10 @@
 import jwt
 import database as db
+import os
 
 class UnauthorizedError(Exception): pass
 
-SECRET_KEY = 'verysecretkey'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 def create_login_token(id, display_name, email, product):
     return jwt.encode({'id': id, 'display_name': display_name, 'email': email, 'product': product}, SECRET_KEY, algorithm='HS256')
